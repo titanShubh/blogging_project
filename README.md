@@ -1,192 +1,166 @@
-📘 Modular Blogging Platform Backend (Django + DRF)
-👤 Author: Shubh Gupta
-🗂️ System Design Project Submission
-🧰 Backend Framework: Django (Python) + Django REST Framework
-🚀 1. Project Overview
+# 📘 Modular Blogging Platform Backend (Django + DRF)
 
-This project is a fully functional Blogging Platform Backend, designed using Django and Django REST Framework (DRF). It follows clean modular architecture, strong backend design principles, and well-structured database models.
+### 👤 Author: **Shubh Gupta**  
+### 🗂️ System Design Project Submission  
+### 🧰 Backend Framework: **Django (Python) + Django REST Framework**
 
-✅ The system supports:
+---
 
-Role-based authentication
+# 🚀 1. Project Overview
 
-Post creation, editing, and publishing
+This project is a fully functional **Blogging Platform Backend**, designed using **Django** and **DRF** with a clean **modular architecture**, well-structured **database models**, and secure **JWT authentication**.
 
-Commenting system
+### ✅ Features:
+- Role-based authentication (Admin, Author, Reader)
+- Post creation, editing, publishing
+- Tags + search + filtering
+- Commenting system
+- Like system (no duplicate likes)
+- Analytics (views, likes, comments)
+- JWT Authentication
+- Unit test cases (pytest)
+- Environment-based configuration
 
-Likes and user interactions
+---
 
-Analytics event logging
+# 🧱 2. System Architecture
 
-Tags and search
-
-Cleanly structured API
-
-Unit testing
-
-Environment-based configuration
-
-This backend can be used with React, Next.js, Flutter, or any frontend framework.
-
-🧱 2. System Architecture
 apps/
 │
-├── accounts/        → Custom User model + role-based permissions
-├── blog/            → Posts, Tags, Publishing system
-├── comments/        → Users can comment on posts
-├── interactions/    → Like system
-└── analytics/       → Event tracking (views, likes, comments)
+├── accounts/ → Custom User model + roles
+├── blog/ → Posts & Tags
+├── comments/ → Comment system
+├── interactions/ → Likes
+└── analytics/ → Event logging
 
-Other components:
-blogging_projects/ → Django core project (settings, urls, wsgi)
-tests/             → All unit tests (pytest)
-.env               → Environment configuration
-docker-compose.yml → Optional PostgreSQL setup
-requirements.txt   → Python dependencies
+yaml
+Copy code
 
-🧩 3. Key Features
-🔐 Authentication & Authorization
+Other important components:
 
-Custom user model
+blogging_projects/ → Django settings, URLs, WSGI
+tests/ → Complete unit test suite
+.env → Environment variables
+requirements.txt → Python dependencies
+docker-compose.yml → Optional PostgreSQL container
 
-JWT authentication
+markdown
+Copy code
 
-Role-based permissions:
+---
 
-Admin: Full access
+# 🧩 3. Key Features
 
-Author: Create/edit/delete posts
+## 🔐 Authentication & Authorization
+- Custom user model  
+- JWT tokens  
+- Roles:
+  - **Admin** → full access  
+  - **Author** → create/edit posts  
+  - **Reader** → view-only  
 
-Reader: Read-only
+## 📝 Posts & Tags
+- CRUD operations  
+- Publish/draft state  
+- Automatic slug generation  
+- Tagging system  
+- Search in title/content/excerpt  
+- Filter by tag/author/status  
 
-📝 Posts & Tags
+## 💬 Comments
+- Add comments  
+- Auto-approved  
+- Comment count saved in Post  
 
-Create, update, delete posts
+## ❤️ Likes
+- Like/unlike posts  
+- Prevent duplicate likes  
+- Like count stored in post  
 
-Draft and published statuses
-
-Automatic slug generation
-
-Excerpts
-
-Tagging system
-
-Search and filter (title, content, tags, author)
-
-💬 Comments
-
-Add comments
-
-Automatic approval
-
-Comment count tracking
-
-❤️ Likes (Interactions)
-
-Like/unlike posts
-
-Duplicate-like prevention
-
-Like count stored in post
-
-👀 Analytics
-
-Tracks events including:
-
-Views
-
-Likes
-
-Comments
+## 👀 Analytics
+Tracks:
+- Views  
+- Likes  
+- Comments  
 
 All events stored for insights.
 
-🛠 4. Technology Stack
-Category	Technology
-Backend	Django
-API Framework	Django REST Framework
-Database	PostgreSQL
-Authentication	SimpleJWT
-Container (Optional)	Docker + Docker Compose
-Testing	Pytest + pytest-django
-Environment	python-dotenv
-🗄️ 5. Database Schema Overview
-User
+---
 
-username
+# 🛠 4. Technology Stack
 
-email
+| Category | Technology |
+|----------|------------|
+| Backend | Django |
+| API Framework | Django REST Framework |
+| Database | PostgreSQL |
+| Authentication | SimpleJWT |
+| Testing | Pytest + pytest-django |
+| Environment | python-dotenv |
+| Optional | Docker Compose |
 
-password
+---
 
-role (admin/author/reader)
+# 🗄️ 5. Database Schema Overview
 
-Post
+## **User**
+- username  
+- email  
+- password  
+- role  
 
-title
+## **Post**
+- title  
+- slug  
+- content  
+- excerpt  
+- status  
+- published_at  
+- FK → author  
+- views_count  
+- likes_count  
+- comments_count  
 
-slug
+## **Tag**
+- name  
+- slug  
 
-content
+## **Comment**
+- FK → post  
+- FK → user  
+- content  
+- approved  
 
-excerpt
+## **Like**
+- FK → post  
+- FK → user  
+- `unique together (user, post)`  
 
-status (draft/published)
+## **Event**
+- FK → post  
+- FK → user  
+- event_type (view/like/comment)
 
-published_at
+---
 
-FK → author
+# 🧰 6. How to Set Up & Run Locally
 
-counters → views, likes, comments
-
-Tag
-
-name
-
-slug
-
-Comment
-
-FK → post
-
-FK → user
-
-content
-
-approved
-
-Like
-
-FK → post
-
-FK → user
-
-Unique together constraint
-
-Analytics Event
-
-FK → post
-
-FK → user
-
-event_type (view/like/comment)
-
-🧰 6. How to Set Up & Run Locally
-1️⃣ Clone the Repository
+## 1️⃣ Clone the repository
+```bash
 git clone <your-repo-url>
 cd blogging_project
-
-2️⃣ Create a Virtual Environment
+2️⃣ Create a virtual environment
+bash
+Copy code
 python3 -m venv venv
 source venv/bin/activate
-
-3️⃣ Install Dependencies
+3️⃣ Install dependencies
+bash
+Copy code
 pip install -r requirements.txt
-
-4️⃣ Create a .env File
-
-Create a file named .env:
-
+4️⃣ Create a .env file
+ini
+Copy code
 POSTGRES_DB=blogging
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
@@ -194,75 +168,74 @@ POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 DJANGO_SECRET_KEY=secret-key
 DJANGO_DEBUG=1
-
-5️⃣ Run PostgreSQL via Docker (Optional but Recommended)
+5️⃣ Start PostgreSQL (optional, using Docker)
+bash
+Copy code
 docker compose up -d
-
-
-Check containers:
-
-docker compose ps
-
-6️⃣ Apply Migrations
+6️⃣ Apply migrations
+bash
+Copy code
 python3 manage.py migrate
-
-7️⃣ Create an Admin User
+7️⃣ Create admin user
+bash
+Copy code
 python3 manage.py createsuperuser
-
-8️⃣ Start the Development Server
-python3.manage.py runserver
-
+8️⃣ Start the server
+bash
+Copy code
+python3 manage.py runserver
 Visit:
 
-Admin Dashboard:
-http://127.0.0.1:8000/admin/
+Admin → http://127.0.0.1:8000/admin
 
-API Posts Endpoint:
-http://127.0.0.1:8000/api/v1/posts/
+Posts API → http://127.0.0.1:8000/api/v1/posts/
 
 🔐 7. Authentication (JWT)
-Get Token
+Get Access + Refresh Token
+bash
+Copy code
 POST /api/v1/auth/token/
-
 Body:
+json
+Copy code
 {
   "username": "your_username",
   "password": "your_password"
 }
+Then use:
 
-Use Token
+makefile
+Copy code
 Authorization: Bearer <access_token>
-
 🧪 8. Running Unit Tests
-
 This project uses pytest.
 
-✔ Run ALL tests:
+Run all tests:
+bash
+Copy code
 pytest -q
-
-✔ Run with coverage:
+Run with coverage:
+bash
+Copy code
 pytest --cov=apps
-
-✔ Run tests for a specific app:
-pytest apps/blog
-
-Tests Included:
+Run tests for a specific module:
+bash
+Copy code
+pytest tests/test_posts.py
+Test files included:
+Copy code
 tests/
-│
 ├── test_auth.py
 ├── test_posts.py
 ├── test_comments.py
-├── test_likes.py
 ├── test_tags.py
+├── test_likes.py
 └── test_analytics.py
-
 📦 9. Dependencies
+All dependencies are inside requirements.txt.
 
-Defined in requirements.txt.
-
-Key packages:
-
-Django
+Major ones:
+django
 
 djangorestframework
 
@@ -278,14 +251,16 @@ pytest-django
 
 python-dotenv
 
-Install all dependencies:
+Install them using:
 
+bash
+Copy code
 pip install -r requirements.txt
-
 🌱 10. Environment Variables
-
 Required:
 
+nginx
+Copy code
 POSTGRES_DB
 POSTGRES_USER
 POSTGRES_PASSWORD
@@ -293,22 +268,4 @@ POSTGRES_HOST
 POSTGRES_PORT
 DJANGO_SECRET_KEY
 DJANGO_DEBUG
-
-
-👉 Create .env.example so others understand what variables are needed.
-
-🎉 11. Conclusion
-
-This project provides:
-
-Clean and scalable Django architecture
-
-Modular design
-
-Real-world blogging functionality
-
-Secure authentication
-
-Complete unit test coverage
-
-Professional documentation
+It's recommended to include a .env.example.
