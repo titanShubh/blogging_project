@@ -25,6 +25,7 @@ This project is a fully functional **Blogging Platform Backend**, designed using
 
 # 🧱 2. System Architecture
 
+```
 apps/
 │
 ├── accounts/ → Custom User model + roles
@@ -32,22 +33,17 @@ apps/
 ├── comments/ → Comment system
 ├── interactions/ → Likes
 └── analytics/ → Event logging
-
-yaml
-Copy code
+```
 
 Other important components:
 
+```
 blogging_projects/ → Django settings, URLs, WSGI
 tests/ → Complete unit test suite
 .env → Environment variables
 requirements.txt → Python dependencies
 docker-compose.yml → Optional PostgreSQL container
-
-markdown
-Copy code
-
----
+```
 
 # 🧩 3. Key Features
 
