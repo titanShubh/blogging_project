@@ -149,18 +149,19 @@ All events stored for insights.
 ```bash
 git clone <your-repo-url>
 cd blogging_project
-2️⃣ Create a virtual environment
-bash
-Copy code
+```
+## 2️⃣ Create a virtual environment
+```bash
 python3 -m venv venv
 source venv/bin/activate
-3️⃣ Install dependencies
-bash
+```
+## 3️⃣ Install dependencies
+```bash
 Copy code
 pip install -r requirements.txt
-4️⃣ Create a .env file
-ini
-Copy code
+```
+## 4️⃣ Create a .env file
+```bash
 POSTGRES_DB=blogging
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
@@ -168,62 +169,59 @@ POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 DJANGO_SECRET_KEY=secret-key
 DJANGO_DEBUG=1
-5️⃣ Start PostgreSQL (optional, using Docker)
-bash
+```
+## 5️⃣ Start PostgreSQL (optional, using Docker)
+```bash
 Copy code
 docker compose up -d
-6️⃣ Apply migrations
-bash
-Copy code
+```
+## 6️⃣ Apply migrations
+```bash
 python3 manage.py migrate
-7️⃣ Create admin user
-bash
-Copy code
+```
+## 7️⃣ Create admin user
+```bash
 python3 manage.py createsuperuser
-8️⃣ Start the server
-bash
-Copy code
+```
+## 8️⃣ Start the server
+```bash
 python3 manage.py runserver
 Visit:
 
 Admin → http://127.0.0.1:8000/admin
 
 Posts API → http://127.0.0.1:8000/api/v1/posts/
+```
 
-🔐 7. Authentication (JWT)
-Get Access + Refresh Token
-bash
-Copy code
+## 🔐 7. Authentication (JWT)
+## Get Access + Refresh Token
+```bash
 POST /api/v1/auth/token/
 Body:
-json
-Copy code
 {
   "username": "your_username",
   "password": "your_password"
 }
 Then use:
 
-makefile
-Copy code
 Authorization: Bearer <access_token>
-🧪 8. Running Unit Tests
+```
+## 🧪 8. Running Unit Tests
 This project uses pytest.
 
 Run all tests:
-bash
-Copy code
+```bash
 pytest -q
+```
 Run with coverage:
-bash
-Copy code
+```bash
 pytest --cov=apps
+```
 Run tests for a specific module:
-bash
-Copy code
+```bash
 pytest tests/test_posts.py
+```
 Test files included:
-Copy code
 tests/
 ├── test_auth.py
 ├── test_posts.py
@@ -231,7 +229,7 @@ tests/
 ├── test_tags.py
 ├── test_likes.py
 └── test_analytics.py
-📦 9. Dependencies
+## 📦 9. Dependencies
 All dependencies are inside requirements.txt.
 
 Major ones:
@@ -253,14 +251,13 @@ python-dotenv
 
 Install them using:
 
-bash
-Copy code
+```bash
 pip install -r requirements.txt
-🌱 10. Environment Variables
+```
+## 🌱 10. Environment Variables
 Required:
 
-nginx
-Copy code
+```nginx
 POSTGRES_DB
 POSTGRES_USER
 POSTGRES_PASSWORD
@@ -268,4 +265,5 @@ POSTGRES_HOST
 POSTGRES_PORT
 DJANGO_SECRET_KEY
 DJANGO_DEBUG
+```
 It's recommended to include a .env.example.
