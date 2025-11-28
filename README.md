@@ -218,6 +218,7 @@ Run tests for a specific module:
 pytest tests/test_posts.py
 ```
 Test files included:
+```
 tests/
 ├── test_auth.py
 ├── test_posts.py
@@ -225,6 +226,7 @@ tests/
 ├── test_tags.py
 ├── test_likes.py
 └── test_analytics.py
+```
 ## 📦 9. Dependencies
 All dependencies are inside requirements.txt.
 
@@ -262,4 +264,3 @@ POSTGRES_PORT
 DJANGO_SECRET_KEY
 DJANGO_DEBUG
 ```
-It's recommended to include a .env.example.
